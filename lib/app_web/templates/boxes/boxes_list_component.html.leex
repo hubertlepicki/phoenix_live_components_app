@@ -1,0 +1,8 @@
+<div>
+  <%= for box <- @boxes do %>
+    <%= live_component @socket, AppWeb.BoxComponent, id: box.id, box: box %>
+  <% end %>
+
+  <hr/>
+  <button phx-click="add_box" phx-target="<%= @myself %>">Add Box!</button>
+</div>
