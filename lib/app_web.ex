@@ -24,6 +24,7 @@ defmodule AppWeb do
       import Plug.Conn
       import AppWeb.Gettext
       alias AppWeb.Router.Helpers, as: Routes
+      import Phoenix.LiveView.Controller
     end
   end
 
@@ -39,6 +40,7 @@ defmodule AppWeb do
 
       # Include shared imports and aliases for views
       unquote(view_helpers())
+      import Phoenix.LiveView.Helpers
     end
   end
 
@@ -48,6 +50,7 @@ defmodule AppWeb do
 
       import Plug.Conn
       import Phoenix.Controller
+      import Phoenix.LiveView.Router
     end
   end
 
