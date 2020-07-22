@@ -3,6 +3,7 @@ defmodule App.Box do
   import Ecto.Changeset
 
   schema "boxes" do
+    has_many :things, App.Thing
     timestamps()
   end
 

@@ -1,8 +1,15 @@
 <div>
   <%= for box <- @boxes do %>
-    <%= live_component @socket, AppWeb.BoxComponent, id: box.id, box: box %>
+    <%= live_component @socket, AppWeb.BoxComponent,
+        id: box.id,
+        box: box,
+        allow_delete: Enum.count(@boxes) > 1,
+        show_add_thing_button: @empty_box_id == nil && @new_thing_form_in_box != box.id,
+        show_new_thing_form: (@empty_box_id == box.id) || (@empty_box_id == nil && @new_thing_form_in_box == box.id) %>
   <% end %>
 
-  <hr/>
-  <button phx-click="add_box" phx-target="<%= @myself %>">Add Box!</button>
+  <%= if @empty_box_id == nil && @new_thing_form_in_box == nil do %>
+    <hr/>
+    <button phx-click="add_box" phx-target="<%= @myself %>">Add Box!</button>
+  <% end %>
 </div>

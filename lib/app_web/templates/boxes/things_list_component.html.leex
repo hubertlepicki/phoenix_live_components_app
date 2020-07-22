@@ -1,0 +1,11 @@
+<div>
+  <%= for thing <- @things do %>
+    <%= live_component @socket, AppWeb.EditThingFormComponent, id: thing.id, thing: thing %>
+  <% end %>
+
+  <%= if @show_add_thing_button do %>
+    <div>
+      <a href="#" phx-click="add_thing" phx-target="<%= @myself %>">Add a Thing!</a>
+    </div>
+  <% end %>
+</div>

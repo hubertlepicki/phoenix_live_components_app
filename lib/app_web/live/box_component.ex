@@ -5,14 +5,14 @@ defmodule AppWeb.BoxComponent do
     Phoenix.View.render(AppWeb.BoxesView, "box_component.html", assigns)
   end
 
-  def update(%{box: box}, socket) do
-    {:ok, assign(socket, box: box)}
+  def update(assigns, socket) do
+    {:ok, assign(socket, assigns)}
   end
 
-  def handle_event("delete_box", _, socket) do
+  def handle_event("delete_box", _, %{assigns: %{allow_delete: true}} = socket) do
     App.Repo.delete(socket.assigns.box)
 
-    send(self(), {:box_deleted, socket.assigns.box})
+    send_update(AppWeb.BoxesListComponent, id: "boxes_list", box_deleted: socket.assigns.box)
     {:noreply, socket}
   end
 end

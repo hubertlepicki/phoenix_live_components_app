@@ -1,4 +1,13 @@
 <div style="border: 1px solid blue; padding: 10px 5px; margin: 10px 0">
+  <%= live_component @socket, AppWeb.ThingsListComponent, id: @box.id, things: @box.things, box_id: @box.id, show_add_thing_button: @show_add_thing_button %>
 
-  <a href="#" phx-click="delete_box" phx-target="<%= @myself %>">[delete]</a>
+  <%= if @show_new_thing_form do %>
+    <%= live_component @socket, AppWeb.NewThingFormComponent, id: @box.id, box_id: @box.id, allow_cancel: Enum.count(@box.things) > 0 %>
+  <% end %>
+
+  <%= if @allow_delete do %>
+    <a style="float: right" href="#" phx-click="delete_box" phx-target="<%= @myself %>">[delete]</a>
+    <div style="clear: both"></div>
+  <% end %>
 </div>
+

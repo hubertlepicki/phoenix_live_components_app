@@ -1,0 +1,14 @@
+<div>
+  <%= f = form_for @changeset, "#", [phx_change: :submit, phx_target: @myself] %>
+    <%= select f, :type, ["toy", "food", "book"], prompt: "Choose type..." %>
+
+    <%= if Ecto.Changeset.get_field(@changeset, :type) do %>
+      <%= text_input f, :name, placeholder: "Enter name...", "phx-debounce": "1000" %>
+      <%= error_tag f, :name %>
+    <% end %>
+  </form>
+
+  <%= if @allow_cancel do %>
+    <a href="#" phx-target="<%= @myself %>" phx-click="cancel">[cancel]</a>
+  <% end %>
+</div>
